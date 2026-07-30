@@ -15,8 +15,8 @@
 progress {
     appearance: none;
     margin: 0;
-    background: #ccc !important;
-    border-radius: 0.2em;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.3em;
     border: none;
 }
 
@@ -25,20 +25,20 @@ progress[role]::after {
 }
 
 progress::-webkit-progress-bar {
-    background: #ccc;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 progress::-moz-progress-bar {
-    background-color: #00a4dc;
+    background-color: #e50914;
 }
 
 progress::-webkit-progress-value {
-    background-color: #00a4dc;
+    background-color: #e50914;
 }
 
 progress[aria-valuenow]::before {
     border-radius: 0.4em;
-    background-color: #00a4dc;
+    background-color: #e50914;
 }
 
 .localnav {
