@@ -25,36 +25,55 @@ $action-hover: palette.$action-hover !default;
 $divider: palette.$divider !default;
 
 // Components
-$appBar-defaultBg: #202020 !default;
+$appBar-defaultBg: rgba(10, 10, 10, 0.7) !default;
 // NOTE: This color is not part of the MUI theme
-$appBar-transparentBg: rgba(0, 0, 0, 0.4) !default;
-$filledInput-bg: rgba(255, 255, 255, 0.09) !default;
+$appBar-transparentBg: rgba(0, 0, 0, 0.3) !default;
+$filledInput-bg: rgba(255, 255, 255, 0.07) !default;
 // NOTE: Defaults to $filledInput-bg so dark themes keep their seamless look
-$filledInput-borderColor: $filledInput-bg !default;
+$filledInput-borderColor: rgba(255, 255, 255, 0.1) !default;
 // NOTE: Card border radius — matches the default in card.scss; exposed as --jf-card-borderRadius for custom user themes
-$card-borderRadius: 0.2em !default;
+$card-borderRadius: 0.6em !default;
 $alert-infoFilledBg: #0288d1 !default;
 $alert-infoFilledColor: #fff !default;
-$button-inheritContainedBg: #424242 !default;
-$button-inheritContainedHoverBg: #616161 !default;
-$snackbarContent-bg: #303030 !default;
-$snackbarContent-color: rgba(255, 255, 255, 0.87) !default;
+$button-inheritContainedBg: #2a2a2a !default;
+$button-inheritContainedHoverBg: #3a3a3a !default;
+$snackbarContent-bg: #1a1a1a !default;
+$snackbarContent-color: rgba(255, 255, 255, 0.9) !default;
+
+// Cinematic surface tokens
+$cinematic-surface: rgba(10, 10, 10, 0.7) !default;
+$cinematic-surface-elevated: rgba(20, 20, 20, 0.85) !default;
+$cinematic-edge-light: rgba(255, 255, 255, 0.08) !default;
+$cinematic-glass-blur: 20px !default;
+$cinematic-glass-saturate: 180% !default;
 
 // Assign custom css variables not part of the MUI theme palette
 :root {
     --jf-palette-background-defaultImage: #{$background-defaultImage};
     --jf-palette-AppBar-transparentBg: #{$appBar-transparentBg};
     --jf-card-borderRadius: #{$card-borderRadius};
+    --jf-cinematic-surface: #{$cinematic-surface};
+    --jf-cinematic-surface-elevated: #{$cinematic-surface-elevated};
+    --jf-cinematic-edge-light: #{$cinematic-edge-light};
+    --jf-cinematic-glass-blur: #{$cinematic-glass-blur};
+    --jf-cinematic-glass-saturate: #{$cinematic-glass-saturate};
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #3b3b3b #202020;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
 .skinHeader,
 html {
     color: var(--jf-palette-text-secondary, $text-secondary);
+}
+
+/* Cinematic glassmorphism base */
+.glassSurface {
+    background: var(--jf-cinematic-surface, $cinematic-surface);
+    backdrop-filter: blur(var(--jf-cinematic-glass-blur, $cinematic-glass-blur)) saturate(var(--jf-cinematic-glass-saturate, $cinematic-glass-saturate));
+    border: 1px solid var(--jf-cinematic-edge-light, $cinematic-edge-light);
 }
 
 .wizardStartForm,
@@ -105,7 +124,10 @@ html {
 .nowPlayingContextMenu,
 html {
     background-color: var(--jf-palette-background-default, $background-default);
-    background-image: var(--jf-palette-background-defaultImage, $background-defaultImage);
+    background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(229, 9, 20, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(229, 9, 20, 0.03) 0%, transparent 50%),
+        var(--jf-palette-background-defaultImage, $background-defaultImage);
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -189,12 +211,12 @@ a[data-role="button"],
 .collapseContent,
 .formDialogFooter:not(.formDialogFooter-clear),
 .formDialogHeader:not(.formDialogHeader-clear) {
-    background-color: var(--jf-palette-background-paper, $background-paper);
+    background-color: var(--jf-cinematic-surface-elevated, $cinematic-surface-elevated);
 }
 
 .paperList,
 .visualCardBox {
-    background-color: var(--jf-palette-background-paper, $background-paper);
+    background-color: var(--jf-cinematic-surface-elevated, $cinematic-surface-elevated);
     border-radius: var(--jf-card-borderRadius, $card-borderRadius);
 }
 
@@ -281,7 +303,10 @@ a[data-role="button"],
 
 .noBackdropTransparency .detailPageWrapperContainer {
     background-color: var(--jf-palette-background-default, $background-default);
-    background-image: var(--jf-palette-background-defaultImage, $background-defaultImage);
+    background-image:
+        radial-gradient(ellipse at 15% 0%, rgba(229, 9, 20, 0.035) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 100%, rgba(229, 9, 20, 0.025) 0%, transparent 50%),
+        var(--jf-palette-background-defaultImage, $background-defaultImage);
     background-attachment: fixed;
     background-position: top center;
     background-repeat: no-repeat;
@@ -325,7 +350,8 @@ a[data-role="button"],
     color: inherit;
     border-width: 0.16em;
     border-style: solid;
-    border-radius: 0.2em;
+    border-radius: 0.5em;
+    transition: border-color 0.2s ease;
 
     &:focus {
         border-color: var(--jf-palette-primary-main, $primary-main);
@@ -340,7 +366,7 @@ a[data-role="button"],
     color: inherit;
     border-width: 0.16em;
     border-style: solid;
-    border-radius: 0.2em;
+    border-radius: 0.5em;
 }
 
 .emby-select-withcolor > option {
@@ -388,7 +414,8 @@ a[data-role="button"],
 
 .mainDrawer,
 .drawer-open {
-    background-color: var(--jf-palette-background-default, $background-default);
+    background-color: var(--jf-cinematic-surface, $cinematic-surface);
+    backdrop-filter: blur(var(--jf-cinematic-glass-blur, $cinematic-glass-blur)) saturate(var(--jf-cinematic-glass-saturate, $cinematic-glass-saturate));
 }
 
 .navMenuOption:hover {
@@ -473,7 +500,7 @@ a[data-role="button"],
     background: var(--jf-palette-Alert-infoFilledBg, $alert-infoFilledBg);
     color: var(--jf-palette-Alert-infoFilledColor, $alert-infoFilledColor);
     padding: 1em;
-    border-radius: 0.25em;
+    border-radius: 0.6em;
 }
 
 .ratingbutton-icon-withrating,
@@ -499,23 +526,23 @@ a[data-role="button"],
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background: transparent;
 }
 
 ::-webkit-scrollbar-track-piece {
-    background-color: #3b3b3b;
+    background-color: transparent;
 }
 
 .layout-desktop ::-webkit-scrollbar,
 .layout-tv ::-webkit-scrollbar {
-    width: 0.4em;
-    height: 0.4em;
+    width: 0.35em;
+    height: 0.35em;
 }
 
 ::-webkit-scrollbar-thumb:horizontal,
 ::-webkit-scrollbar-thumb:vertical {
-    border-radius: 2px;
-    background: center no-repeat #888;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .timeslotHeaders-desktop::-webkit-scrollbar {

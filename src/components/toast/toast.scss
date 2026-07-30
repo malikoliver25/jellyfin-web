@@ -25,16 +25,17 @@
 .toast {
     min-width: 20em;
     box-sizing: border-box;
-    box-shadow: 0 0.0725em 0.29em 0 rgba(0, 0, 0, 0.37);
-    border-radius: 0.15em;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    border-radius: 0.5em;
     cursor: default;
-    transition: transform 0.3s ease-out;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     min-height: initial;
     padding: 1em 1.5em;
     font-size: 110%;
     margin: 0.25em 0;
     margin-right: auto;
     pointer-events: initial;
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .toast:first-child {

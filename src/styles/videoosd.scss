@@ -10,7 +10,8 @@
     left: 0;
     right: 0;
     position: fixed;
-    background: linear-gradient(0deg, rgba(16, 16, 16, 0.75) 0%, rgba(16, 16, 16, 0) 100%);
+    background: linear-gradient(0deg, rgba(8, 8, 8, 0.85) 0%, rgba(8, 8, 8, 0.4) 60%, rgba(8, 8, 8, 0) 100%);
+    backdrop-filter: blur(12px) saturate(150%);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
     padding-top: 7.5em;
@@ -24,15 +25,18 @@
     -webkit-touch-callout: none;
     pointer-events: none;
 
-    @include conditional-max(padding-bottom, 1.75em, env(safe-area-inset-bottom));
+    /* Pillar 4: Leave room for Jellyscrub WebP thumbnail scrubber
+       and absolute-positioned "Skip Intro" / "Skip Credits" buttons */
+    @include conditional-max(padding-bottom, 3.5em, env(safe-area-inset-bottom));
 }
 
 .skinHeader-withBackground.osdHeader {
     transition: opacity 0.3s ease-out;
     position: relative;
     z-index: 1;
-    background: linear-gradient(180deg, rgba(16, 16, 16, 0.75) 0%, rgba(16, 16, 16, 0) 100%);
-    backdrop-filter: none;
+    background: linear-gradient(180deg, rgba(8, 8, 8, 0.85) 0%, rgba(8, 8, 8, 0.4) 60%, rgba(8, 8, 8, 0) 100%);
+    backdrop-filter: blur(12px) saturate(150%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     color: #eee;
     height: 7.5em;
     pointer-events: none;
@@ -276,9 +280,9 @@
     height: 96px;
     width: 96px;
 
-    color: rgba(0, 164, 220, 0);
-    background: rgba(0, 164, 220, 0);
-    box-shadow: 0 0 0 0 rgba(0, 164, 220, 0);
+    color: rgba(229, 9, 20, 0);
+    background: rgba(229, 9, 20, 0);
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
     transform: scale(1);
 }
 
@@ -293,46 +297,46 @@
 @keyframes pulse {
     0% {
         transform: scale(0.95);
-        color: rgba(0, 164, 220, 0.7);
-        background: rgba(0, 164, 220, 0.3);
-        box-shadow: 0 0 0 0 rgba(0, 164, 220, 0.3);
+        color: rgba(229, 9, 20, 0.7);
+        background: rgba(229, 9, 20, 0.3);
+        box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.3);
     }
 
     70% {
         transform: scale(1);
-        color: rgba(0, 164, 220, 0);
-        background: rgba(0, 164, 220, 0);
-        box-shadow: 0 0 0 60px rgba(0, 164, 220, 0);
+        color: rgba(229, 9, 20, 0);
+        background: rgba(229, 9, 20, 0);
+        box-shadow: 0 0 0 60px rgba(229, 9, 20, 0);
     }
 
     100% {
         transform: scale(0.95);
-        color: rgba(0, 164, 220, 0);
-        background: rgba(0, 164, 220, 0);
-        box-shadow: 0 0 0 0 rgba(0, 164, 220, 0);
+        color: rgba(229, 9, 20, 0);
+        background: rgba(229, 9, 20, 0);
+        box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
     }
 }
 
 @keyframes infinite-pulse {
     0% {
         transform: scale(0.95);
-        color: rgba(0, 164, 220, 0.7);
-        background: rgba(0, 164, 220, 0.3);
-        box-shadow: 0 0 0 0 rgba(0, 164, 220, 0.3);
+        color: rgba(229, 9, 20, 0.7);
+        background: rgba(229, 9, 20, 0.3);
+        box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.3);
     }
 
     70% {
         transform: scale(1);
-        color: rgba(0, 164, 220, 0.6);
-        background: rgba(0, 164, 220, 0);
-        box-shadow: 0 0 0 60px rgba(0, 164, 220, 0);
+        color: rgba(229, 9, 20, 0.6);
+        background: rgba(229, 9, 20, 0);
+        box-shadow: 0 0 0 60px rgba(229, 9, 20, 0);
     }
 
     100% {
         transform: scale(0.95);
-        color: rgba(0, 164, 220, 0.7);
-        background: rgba(0, 164, 220, 0.3);
-        box-shadow: 0 0 0 0 rgba(0, 164, 220, 0);
+        color: rgba(229, 9, 20, 0.7);
+        background: rgba(229, 9, 20, 0.3);
+        box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
     }
 }
 
