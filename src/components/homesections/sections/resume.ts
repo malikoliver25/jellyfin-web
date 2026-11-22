@@ -60,7 +60,8 @@ function getItemsToResumeHtmlFn(
             inheritThumb: !useEpisodeImages,
             shape: (mediaType === 'Book') ?
                 getPortraitShape(enableOverflow) :
-                getBackdropShape(enableOverflow),
+                getBackdropShape(enableOverflow), // Video resume rows already render landscape backdrops
+            // ponytail: wide CW cards come free with overflowBackdrop sizing (45.5vw); no extra class needed
             overlayText: false,
             showTitle: true,
             showParentTitle: true,
