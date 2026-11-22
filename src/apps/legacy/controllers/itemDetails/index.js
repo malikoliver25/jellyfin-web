@@ -2157,6 +2157,12 @@ export default function (view, params) {
         view.addEventListener('viewshow', function (e) {
             const page = this;
 
+            // Reset one-shot buttons so repeated item navigations never stack listeners
+            for (const sel of ['.btnSpeakOverview', '.overview-expand']) {
+                const stale = page.querySelector(sel);
+                stale?.replaceWith(stale.cloneNode(true));
+            }
+
             libraryMenu.setTransparentMenu(!layoutManager.mobile);
 
             if (e.detail.isRestored) {
