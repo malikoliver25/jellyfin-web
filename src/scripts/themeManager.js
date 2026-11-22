@@ -42,8 +42,10 @@ function setTheme(id) {
 
             currentThemeId = info.id;
 
-            // Smooth cross-fade: allow color/background transitions for one frame, then suppress again
+            // Smooth cross-fade: allow color/background transitions for one frame, then suppress again.
+            // Remove any stale transition style first so rapid clicks don't stack timers.
             const root = document.documentElement;
+            document.getElementById('theme-transition')?.remove();
             const style = document.createElement('style');
             style.id = 'theme-transition';
             style.textContent = '* { transition: background-color .45s ease, color .45s ease, border-color .45s ease, box-shadow .45s ease !important; }';

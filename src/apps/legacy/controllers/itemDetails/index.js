@@ -935,11 +935,28 @@ function renderOverview(page, item) {
         // eslint-disable-next-line sonarjs/disabled-auto-escaping
         const overview = DOMPurify.sanitize(markdownIt({ html: true }).render(stripHtmlTags(item.Overview)));
         if (overview) {
-            for (const overviewElemnt of overviewElements) {
-                overviewElemnt.innerHTML = '<bdi>' + overview + '</bdi>';
-                overviewElemnt.classList.remove('hide');
-                overviewElemnt.classList.add('detail-clamp-text');
+            const speakBtn = page.querySelector('.btnSpeakOverview');
+            if (speakBtn) {
+                speakBtn.classList.remove('hide');
+                speakBtn.addEventListener('click', () => {
+                    const synth = window.speechSynthesis;
+                    if (!synth) return;
+                    if (synth.speaking) {
+                        synth.cancel();
+                        speakBtn.setAttribute('aria-pressed', 'false');
+                        return;
+                    }
+                    const plain = stripHtmlTags(item.Overview || '');
+                    if (!plain) return;
+                    synth.cancel();
 
+                    const utter = new SpeechSynthesisUtterance(plain.slice(0, 900));
+                    utter.onend = () => speakBtn.setAttribute('aria-pressed', 'false');
+                    speakBtn.setAttribute('aria-pressed', 'true');
+                    synth.speak(utter);
+                });
+            }
+            for (const overviewElemnt of overviewElements) {
                 // Grab the sibling element to control the expand state
                 const expandButton = overviewElemnt.parentElement.querySelector('.overview-expand');
 
