@@ -29,6 +29,10 @@
     line-height: 1.35;
     transform-origin: center;
     transition: 0.2s;
+
+    &:active {
+        transform: scale(0.96);
+    }
 }
 
 .emby-button.show-focus:focus {

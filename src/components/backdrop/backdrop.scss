@@ -34,6 +34,12 @@
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .backdropImageFadeIn {
+        animation: none;
+    }
+}
+
 .displayingBackdropImage {
     z-index: 1;
 }

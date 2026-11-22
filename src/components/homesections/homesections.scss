@@ -65,7 +65,7 @@
     left: 0;
     right: 0;
     bottom: 12%;
-    max-width: 40em;
+    max-width: min(40em, 90vw);
 }
 
 .heroLogo {
@@ -79,7 +79,9 @@
     margin: 0 0 0.5em;
     font-size: 2.4em;
     font-weight: 800;
+    line-height: 1.1;
     letter-spacing: -0.02em;
+    text-wrap: balance;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 
     .layout-mobile & {
@@ -100,15 +102,21 @@
     border-radius: 0.25em;
     font-size: 0.78em;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
     color: rgba(255, 255, 255, 0.9);
     background: rgba(0, 0, 0, 0.35);
 }
 
 .heroOverview {
     margin: 0 0 1.2em;
+    max-width: 62ch;
     font-size: 1.05em;
     font-weight: 400;
-    line-height: 1.45;
+    line-height: 1.55;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
     color: rgba(255, 255, 255, 0.85);
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
     display: -webkit-box;
@@ -130,7 +138,7 @@
         padding: 0.5em 1.4em;
         font-size: 1.05em;
         font-weight: 600;
-        border-radius: 0.3em;
+        border-radius: var(--jf-card-borderRadius, 0.6em);
     }
 
     .heroPlay {
@@ -176,5 +184,9 @@
 @media (prefers-reduced-motion: reduce) {
     .heroBillboard {
         transition: none;
+    }
+
+    .heroBillboard .heroActions .emby-button:active {
+        transform: none;
     }
 }
