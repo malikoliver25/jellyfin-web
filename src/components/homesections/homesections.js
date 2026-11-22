@@ -7,6 +7,7 @@ import Dashboard from 'utils/dashboard';
 import { queryClient } from 'utils/query/queryClient';
 
 import { loadRecordings } from './sections/activeRecordings';
+import { loadHeroBillboard } from './sections/heroBillboard';
 import { loadLibraryButtons } from './sections/libraryButtons';
 import { loadLibraryTiles } from './sections/libraryTiles';
 import { loadLiveTV } from './sections/liveTv';
@@ -72,6 +73,8 @@ export function loadSections(elem, apiClient, user, userSettings) {
                 }
 
                 elem.innerHTML = html;
+
+                loadHeroBillboard(elem, apiClient);
                 elem.classList.add('homeSectionsContainer');
 
                 const promises = getAllSectionsToShow(userSettings)

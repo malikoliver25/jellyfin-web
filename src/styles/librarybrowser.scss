@@ -228,6 +228,12 @@
     padding-top: env(safe-area-inset-top);
 }
 
+/* Header transitions from glass to solid near-black once content scrolls beneath it */
+.skinHeader-withBackground {
+    background: rgba(8, 8, 8, 0.92);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
 .layout-tv .skinHeader {
     /* In TV layout, it makes more sense to keep the top bar at the top of the page
        Having it follow the view only makes us lose vertical space, while not being focusable */
@@ -575,19 +581,29 @@
 .itemBackdrop {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center 25%;
     background-attachment: fixed;
-    height: 40vh;
+    height: 62vh;
+    min-height: 24em;
     position: relative;
     animation: backdrop-fadein 800ms ease-in normal both;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, #080808 0%, rgba(8, 8, 8, 0.4) 35%, rgba(8, 8, 8, 0) 65%);
+        pointer-events: none;
+    }
 
     .layout-mobile & {
         background-attachment: initial;
         background-position: top center;
         margin-top: 3rem;
+        height: 42vh;
 
         @media all and (orientation: portrait) and (max-width: 40em) {
-            height: 30vh;
+            height: 32vh;
         }
     }
 
@@ -681,16 +697,34 @@
     margin: 0.5em 0 0.5em;
 }
 
+.layout-mobile .nameContainer .itemName {
+    font-size: 1.6em;
+}
+
 .nameContainer {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+
+    .itemName {
+        font-size: 2.2em;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .parentName {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.75);
+    }
 }
 
 .itemMiscInfo {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.8);
 
     .layout-mobile & {
         @media all and (orientation: portrait) and (max-width: 40em) {
@@ -786,6 +820,8 @@
     }
 }
 
+/* Cinematic detail-page typography — merged into existing selectors above to avoid duplicates */
+
 .infoWrapper {
     min-width: 0;
     max-width: 100%;
@@ -820,6 +856,7 @@
 
     .layout-desktop & {
         flex-grow: 1;
+        background: linear-gradient(to bottom, rgba(8, 8, 8, 0) 0%, #080808 12%);
     }
 
     .layout-mobile & {

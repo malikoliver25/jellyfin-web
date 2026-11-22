@@ -118,6 +118,19 @@ button::-moz-focus-inner {
     filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
 }
 
+/* Pointer hover mirrors the keyboard-focus treatment so mouse users get the same lift */
+@media (hover: hover) {
+    .card:hover > .cardBox {
+        transform: scale(1.05) translateY(-4px);
+        filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
+    }
+
+    .card:hover > .cardBox,
+    .card.show-animation:focus > .cardBox {
+        transition: transform 0.3s ease;
+    }
+}
+
 .cardBox-bottompadded {
     margin-bottom: 1.8em !important;
 }
