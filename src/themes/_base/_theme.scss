@@ -678,3 +678,62 @@ a[data-role="button"],
 .mdl-radio.show-focus .mdl-radio__button:focus + .mdl-radio__circles svg .mdl-radio__inner-circle {
     color: var(--jf-palette-secondary-main, $secondary-main);
 }
+
+/* =====================================================================
+   Cinematic structure overhaul (dx.bi-inspired, adapted to jellyfin-web):
+   edge-faded carousels, snap scrolling, larger row titles, card lift
+   with inner ring + image zoom, press scale.
+   ===================================================================== */
+
+/* Rows: soft edge fade so cards glide out instead of clipping, snap scroll */
+.emby-scroller .scrollSlider {
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties, property-no-vendor-prefix */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 2.6rem, #000 calc(100% - 2.6rem), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 2.6rem, #000 calc(100% - 2.6rem), transparent 100%);
+}
+
+.emby-scroller .scrollSlider::-webkit-scrollbar {
+    display: none;
+}
+
+/* Row titles: bigger, tighter, cinematic */
+.sectionTitle-cards {
+    font-size: clamp(1.15em, 1.6vw, 1.5em);
+}
+
+/* Cards: lift + inner ring on hover/focus, image zooms, press compresses */
+@media (hover: hover) {
+    .card:hover > .cardBox .cardImageContainer {
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+    }
+
+    .card:hover > .cardBox .cardImage {
+        transform: scale(1.04);
+    }
+}
+
+.card .cardImage {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card > .cardBox:active .cardImageContainer {
+    scale: 0.97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .emby-scroller .scrollSlider {
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+    }
+
+    .card .cardImage,
+    .card > .cardBox:active .cardImageContainer {
+        transition: none;
+        transform: none;
+        scale: none;
+    }
+}
