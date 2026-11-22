@@ -54,3 +54,20 @@
     text-decoration: none;
     color: inherit;
 }
+
+.askAgentMic.listening {
+    color: var(--jf-palette-primary-main, #e50914);
+    animation: askMicPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes askMicPulse {
+    0%,
+ 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .askAgentMic.listening {
+        animation: none;
+    }
+}

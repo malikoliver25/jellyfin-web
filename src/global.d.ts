@@ -124,4 +124,23 @@ export declare global {
     const __PACKAGE_JSON_VERSION__: string;
     const __USE_SYSTEM_FONTS__: boolean;
     const __WEBPACK_SERVE__: boolean;
+
+    // Minimal Web Speech API types (not in TS lib.dom for this target)
+    interface SpeechRecognitionResultItem { readonly transcript: string; }
+    interface SpeechRecognitionResult { readonly [index: number]: SpeechRecognitionResultItem; readonly length: number; }
+    interface SpeechRecognitionResultList { readonly [index: number]: SpeechRecognitionResult; readonly length: number; }
+    interface SpeechRecognitionEvent { readonly results: SpeechRecognitionResultList; }
+    interface SpeechRecognition {
+        lang: string;
+        interimResults: boolean;
+        onresult: ((e: SpeechRecognitionEvent) => void) | null;
+        onend: (() => void) | null;
+        onerror: (() => void) | null;
+        start(): void;
+        stop(): void;
+    }
+    interface Window {
+        SpeechRecognition?: new () => SpeechRecognition;
+        webkitSpeechRecognition?: new () => SpeechRecognition;
+    }
 }

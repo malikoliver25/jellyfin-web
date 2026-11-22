@@ -4,16 +4,12 @@ import { ItemFields } from '@jellyfin/sdk/lib/generated-client/models/item-field
 import { ItemSortBy } from '@jellyfin/sdk/lib/generated-client/models/item-sort-by';
 import { SortOrder } from '@jellyfin/sdk/lib/generated-client/models/sort-order';
 import { getLibraryApi, getSearchApi } from '@jellyfin/sdk/lib/utils/api';
-import React, { type FC, useCallback, useMemo, useState } from 'react';
+import React, { type FC, useCallback, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useApi } from 'hooks/useApi';
 import { appRouter } from 'components/router/appRouter';
 import globalize from 'lib/globalize';
-
-interface AskAgentProps {
-    query: string;
-}
 
 // Stop-word lookup for the tiny local "agent" (static keys → Record, not Set).
 // Turns a natural-language query ("action movies from the 90s not watched") into a Jellyfin items query.
@@ -107,15 +103,51 @@ function parseQuery(raw: string): ParsedQuery {
     return parsed;
 }
 
-const AskAgent: FC<AskAgentProps> = ({ query }) => {
+interface AskAgentProps {
+    query: string;
+    onQueryChange?: (q: string) => void;
+}
+
+const AskAgent: FC<AskAgentProps> = ({ query, onQueryChange }) => {
     const { api, user } = useApi();
     const [items, setItems] = useState<BaseItemDto[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
     const [ran, setRan] = useState(false);
     const [degradedNote, setDegradedNote] = useState<string>();
+    const [listening, setListening] = useState(false);
+    const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+    const recognitionSupported = useMemo(() => {
+        const w = window as unknown as { SpeechRecognition?: new () => SpeechRecognition; webkitSpeechRecognition?: new () => SpeechRecognition };
+        return !!(w.SpeechRecognition || w.webkitSpeechRecognition);
+    }, []);
 
     const parsed = useMemo(() => parseQuery(query), [query]);
+
+    const toggleListening = useCallback(() => {
+        const w = window as unknown as { SpeechRecognition?: new () => SpeechRecognition; webkitSpeechRecognition?: new () => SpeechRecognition };
+        const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
+        if (!Ctor) return;
+        if (listening) {
+            recognitionRef.current?.stop();
+            setListening(false);
+            return;
+        }
+        // eslint-disable-next-line compat/compat -- feature-detected via recognitionSupported
+        const rec = new Ctor();
+        rec.lang = navigator.language;
+        rec.interimResults = true;
+        rec.onresult = (e: SpeechRecognitionEvent) => {
+            const text = Array.from(e.results).map(r => r[0].transcript).join(' ');
+            onQueryChange?.(text);
+        };
+        rec.onend = () => setListening(false);
+        rec.onerror = () => setListening(false);
+        recognitionRef.current = rec;
+        rec.start();
+        setListening(true);
+    }, [listening, onQueryChange]);
 
     const run = useCallback(async () => {
         if (!api || !user?.Id || !query.trim()) return;
@@ -183,6 +215,17 @@ const AskAgent: FC<AskAgentProps> = ({ query }) => {
             <div className='askAgentBar'>
                 <span className='material-icons' aria-hidden='true'>smart_toy</span>
                 <span className='askAgentLabel'>Ask Jellyfin</span>
+                <button
+                    type='button'
+                    className={`emby-button button-flat askAgentMic${listening ? ' listening' : ''}`}
+                    aria-label={listening ? 'Stop listening' : 'Voice input'}
+                    aria-pressed={listening}
+                    onClick={toggleListening}
+                    disabled={!recognitionSupported}
+                    title={recognitionSupported ? 'Voice input' : 'Voice input not supported in this browser'}
+                >
+                    <span className='material-icons' aria-hidden='true'>mic</span>
+                </button>
                 <button type='button' className='emby-button raised button-submit' onClick={run} disabled={loading || !query.trim()}>
                     {loading ? '…' : globalize.translate('Search')}
                 </button>
