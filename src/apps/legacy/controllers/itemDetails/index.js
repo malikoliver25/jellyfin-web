@@ -935,7 +935,10 @@ function renderOverview(page, item) {
         // eslint-disable-next-line sonarjs/disabled-auto-escaping
         const overview = DOMPurify.sanitize(markdownIt({ html: true }).render(stripHtmlTags(item.Overview)));
         if (overview) {
-            const speakBtn = page.querySelector('.btnSpeakOverview');
+            // Clone-and-replace so re-running renderOverview on item navigation never stacks listeners
+            const staleSpeak = page.querySelector('.btnSpeakOverview');
+            const speakBtn = staleSpeak?.cloneNode(true) ?? null;
+            staleSpeak?.replaceWith(speakBtn);
             if (speakBtn) {
                 speakBtn.classList.remove('hide');
                 speakBtn.addEventListener('click', () => {
@@ -957,9 +960,11 @@ function renderOverview(page, item) {
                 });
             }
             for (const overviewElemnt of overviewElements) {
-                // Grab the sibling element to control the expand state
-                const expandButton = overviewElemnt.parentElement.querySelector('.overview-expand');
-
+                // Clone-and-replace so repeated renders don't stack listeners
+                const staleExpand = overviewElemnt.parentElement.querySelector('.overview-expand');
+                const expandButton = staleExpand?.cloneNode(true) ?? null;
+                staleExpand?.replaceWith(expandButton);
+                if (!expandButton) continue;
                 // Detect if we have overflow of text. Based on this StackOverflow answer
                 // https://stackoverflow.com/a/35157976
                 if (Math.abs(overviewElemnt.scrollHeight - overviewElemnt.offsetHeight) > 2) {
