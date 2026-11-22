@@ -2159,8 +2159,9 @@ export default function (view, params) {
 
             // Reset one-shot buttons so repeated item navigations never stack listeners
             for (const sel of ['.btnSpeakOverview', '.overview-expand']) {
-                const stale = page.querySelector(sel);
-                stale?.replaceWith(stale.cloneNode(true));
+                for (const stale of Array.from(page.querySelectorAll(sel))) {
+                    stale.replaceWith(stale.cloneNode(true));
+                }
             }
 
             libraryMenu.setTransparentMenu(!layoutManager.mobile);
