@@ -214,6 +214,11 @@ const AskAgent: FC<AskAgentProps> = ({ query, onQueryChange }) => {
         }
     }, [api, user, query, parsed]);
 
+    // Auto-run on query change (search.tsx debounces 500ms before passing query down)
+    useEffect(() => {
+        if (query.trim()) void run();
+    }, [query, run]);
+
     return (
         <div className='askAgent padded-left padded-right'>
             <div className='askAgentBar'>
