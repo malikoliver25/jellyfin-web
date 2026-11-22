@@ -4,7 +4,7 @@ import { ItemFields } from '@jellyfin/sdk/lib/generated-client/models/item-field
 import { ItemSortBy } from '@jellyfin/sdk/lib/generated-client/models/item-sort-by';
 import { SortOrder } from '@jellyfin/sdk/lib/generated-client/models/sort-order';
 import { getLibraryApi, getSearchApi } from '@jellyfin/sdk/lib/utils/api';
-import React, { type FC, useCallback, useMemo, useRef, useState } from 'react';
+import React, { type FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useApi } from 'hooks/useApi';
@@ -118,16 +118,15 @@ const AskAgent: FC<AskAgentProps> = ({ query, onQueryChange }) => {
     const [listening, setListening] = useState(false);
     const recognitionRef = useRef<SpeechRecognition | null>(null);
 
-    const recognitionSupported = useMemo(() => {
-        const w = window as unknown as { SpeechRecognition?: new () => SpeechRecognition; webkitSpeechRecognition?: new () => SpeechRecognition };
-        return !!(w.SpeechRecognition || w.webkitSpeechRecognition);
-    }, []);
+    const recognitionSupported = useMemo(
+        () => !!(window.SpeechRecognition || window.webkitSpeechRecognition),
+        []
+    );
 
     const parsed = useMemo(() => parseQuery(query), [query]);
 
     const toggleListening = useCallback(() => {
-        const w = window as unknown as { SpeechRecognition?: new () => SpeechRecognition; webkitSpeechRecognition?: new () => SpeechRecognition };
-        const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
+        const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!Ctor) return;
         if (listening) {
             recognitionRef.current?.stop();
@@ -137,7 +136,7 @@ const AskAgent: FC<AskAgentProps> = ({ query, onQueryChange }) => {
         // eslint-disable-next-line compat/compat -- feature-detected via recognitionSupported
         const rec = new Ctor();
         rec.lang = navigator.language;
-        rec.interimResults = true;
+        rec.interimResults = false; // one final transcript per session — no per-word URL churn
         rec.onresult = (e: SpeechRecognitionEvent) => {
             const text = Array.from(e.results).map(r => r[0].transcript).join(' ');
             onQueryChange?.(text);
@@ -148,6 +147,11 @@ const AskAgent: FC<AskAgentProps> = ({ query, onQueryChange }) => {
         rec.start();
         setListening(true);
     }, [listening, onQueryChange]);
+
+    // Stop the mic if the panel unmounts mid-listen
+    useEffect(() => () => {
+        recognitionRef.current?.stop();
+    }, []);
 
     const run = useCallback(async () => {
         if (!api || !user?.Id || !query.trim()) return;

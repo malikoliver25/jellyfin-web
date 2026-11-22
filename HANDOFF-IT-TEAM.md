@@ -43,6 +43,8 @@ Dashboard → Networking → CORS: add your frontend origin (e.g. `https://tv.yo
 
 Open the deployed URL → "Add Server" → enter the Jellyfin server URL (`https://jellyfin.frienddomain.com` or `http://<ip>:8096`) → log in. The custom frontend streams directly from the existing backend; no server data changes needed.
 
+Note: the Ask Jellyfin voice-input (mic) button needs HTTPS or localhost — browsers block `SpeechRecognition` on plain HTTP. If the frontend is served over `http://<ip>`, the mic button shows as disabled with a tooltip; everything else works. TV/remote clients have no mic API, so the agent is keyboard-driven there.
+
 ## Recommended server plugins (verified against your Jellyfin 12.4.0)
 
 Add these repository URLs in Dashboard → Plugins → Repositories, then install:
