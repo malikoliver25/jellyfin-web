@@ -10,6 +10,9 @@ import catppuccinMocha from './catppuccin-mocha';
 import dark from './dark';
 import light from './light';
 import purplehaze from './purplehaze';
+import disneyplus from './disneyplus';
+import hulu from './hulu';
+import netflix from './netflix';
 import wmc from './wmc';
 
 /** The default theme containing all color scheme variants. */
@@ -23,6 +26,9 @@ const DEFAULT_THEME = createTheme({
     ...DEFAULT_THEME_OPTIONS,
     colorSchemes: {
         appletv,
+        disneyplus,
+        hulu,
+        netflix,
         blueradiance,
         'catppuccin-frappe': catppuccinFrappe,
         'catppuccin-latte': catppuccinLatte,

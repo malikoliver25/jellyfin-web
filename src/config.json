@@ -40,9 +40,17 @@
       "id": "purplehaze",
       "color": "#000420"
     }, {
-      "name": "WMC",
-      "id": "wmc",
-      "color": "#0c2450"
+      "name": "Disney+",
+      "id": "disneyplus",
+      "color": "#040714"
+    }, {
+      "name": "Hulu",
+      "id": "hulu",
+      "color": "#0b0c0f"
+    }, {
+      "name": "Netflix",
+      "id": "netflix",
+      "color": "#141414"
     }
   ],
   "menuLinks": [],

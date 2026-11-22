@@ -1,0 +1,13 @@
+/* Netflix theme — cinematic dark with crimson accent */
+@use '../_base/palette' as palette;
+@use '../_base/theme' with (
+    $background-default: #080808,
+    $background-paper: #141414,
+    $primary-main: #e50914,
+    $primary-dark: #b20710,
+    $primary-light: #ff1a25,
+    $text-primary: #ffffff,
+    $text-secondary: rgba(255, 255, 255, 0.65),
+    $appBar-defaultBg: rgba(8, 8, 8, 0.92),
+    $appBar-transparentBg: rgba(8, 8, 8, 0.65)
+);
