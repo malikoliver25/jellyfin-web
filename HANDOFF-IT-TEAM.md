@@ -43,6 +43,26 @@ Dashboard → Networking → CORS: add your frontend origin (e.g. `https://tv.yo
 
 Open the deployed URL → "Add Server" → enter the Jellyfin server URL (`https://jellyfin.frienddomain.com` or `http://<ip>:8096`) → log in. The custom frontend streams directly from the existing backend; no server data changes needed.
 
+## Recommended server plugins (verified against your Jellyfin 12.4.0)
+
+Add these repository URLs in Dashboard → Plugins → Repositories, then install:
+
+| Plugin | Repo manifest URL | Version to install | Notes |
+|---|---|---|---|
+| Merge Versions | `https://raw.githubusercontent.com/danieladov/JellyfinPluginManifest/master/manifest.json` | 12.0.1.0 (targetAbi 12.0) | Groups duplicate movie versions (1080p/4K/Remux) into one item with a version picker |
+| Jellyfin Enhanced | `https://raw.githubusercontent.com/n00bcodr/jellyfin-enhanced/main/manifest.json` | **12.18.0** — on JF12 the catalog auto-selects the `12.0.0.0` ABI zip (dual 10.11/12.0 manifest; don't install the 10.11 one) | Seerr/TMDB integration, keyboard shortcuts, extra theme palettes |
+| Custom Logo (jellyfin-plugin-custom-logo) | from the awesome-jellyfin ✅ JF12 catalog | latest JF12 build | GUI upload for splash + header + admin drawer logo + favicon — preferable to the Custom CSS override if you want dashboard config |
+| Jellyscrub | `https://raw.githubusercontent.com/nicknsy/jellyscrub/main/manifest.json` | 2.1.0.0 — targetAbi 10.10.0.0, **catalog will hide it on JF12**; manual zip install only, accept compat risk | Seek-bar hover previews (BIF trickplay) |
+| Poster Rotator | `https://raw.githubusercontent.com/jonah-jamesen/jellyfin-plugin-poster-rotator/main/manifest.json` | 1.0.1.2 — also 10.10 ABI, hidden on JF12 | Rotating posters; zip asset verified to exist |
+
+Do NOT install: bvolvy/CustomLogoPlugin (release tag has no zip asset — verified via GitHub API), danieladov Skin Manager (10.7-only, conflicts with this custom frontend).
+
+Custom banner logo without any plugin: Dashboard → Branding → Custom CSS →
+```css
+.pageTitleWithDefaultLogo { background-image: url("https://your-host/logo.png") !important; }
+```
+(PNG with transparency or SVG both work; keep it wide ~3:1. Animated GIF/APNG animates; animated SVG does not render as CSS background.)
+
 ## Rollback
 
 ```bash
