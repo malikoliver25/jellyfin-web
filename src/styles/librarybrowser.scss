@@ -219,9 +219,9 @@
     display: flex;
     flex-direction: column;
     contain: layout style paint;
-    background: rgba(8, 8, 8, 0.65);
-    backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: var(--jf-palette-AppBar-transparentBg, rgba(8, 8, 8, 0.65));
+    backdrop-filter: blur(var(--jf-cinematic-glass-blur, 20px)) saturate(var(--jf-cinematic-glass-saturate, 180%));
+    border-bottom: 1px solid var(--jf-cinematic-edge-light, rgba(255, 255, 255, 0.06));
     transition: background ease-in-out 0.5s;
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
@@ -230,8 +230,8 @@
 
 /* Header transitions from glass to solid near-black once content scrolls beneath it */
 .skinHeader-withBackground {
-    background: rgba(8, 8, 8, 0.92);
-    border-bottom-color: rgba(255, 255, 255, 0.08);
+    background: var(--jf-palette-AppBar-defaultBg, rgba(8, 8, 8, 0.92));
+    border-bottom-color: var(--jf-cinematic-edge-light, rgba(255, 255, 255, 0.08));
 }
 
 .layout-tv .skinHeader {
@@ -697,10 +697,6 @@
     margin: 0.5em 0 0.5em;
 }
 
-.layout-mobile .nameContainer .itemName {
-    font-size: 1.6em;
-}
-
 .nameContainer {
     display: flex;
     flex-direction: column;
@@ -744,6 +740,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.layout-mobile .nameContainer .itemName {
+    font-size: 1.6em;
 }
 
 .layout-mobile .mainDetailButtons {

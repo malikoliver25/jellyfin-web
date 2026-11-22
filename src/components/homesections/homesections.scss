@@ -134,22 +134,22 @@
     }
 
     .heroPlay {
-        background: #fff;
-        color: #000;
+        background: var(--jf-hero-playBg, #fff);
+        color: var(--jf-hero-playColor, #000);
 
         &:hover,
         &:focus {
-            background: rgba(255, 255, 255, 0.85);
+            background: var(--jf-hero-playHoverBg, rgba(255, 255, 255, 0.85));
         }
     }
 
     .heroInfo {
-        background: rgba(109, 109, 110, 0.7);
-        color: #fff;
+        background: var(--jf-hero-infoBg, rgba(109, 109, 110, 0.7));
+        color: var(--jf-hero-infoColor, #fff);
 
         &:hover,
         &:focus {
-            background: rgba(109, 109, 110, 0.5);
+            background: var(--jf-hero-infoHoverBg, rgba(109, 109, 110, 0.5));
         }
     }
 }

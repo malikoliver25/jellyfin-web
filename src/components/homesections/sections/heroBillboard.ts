@@ -113,9 +113,9 @@ function renderHero(
                         <span class="material-icons" aria-hidden="true">play_arrow</span>
                         ${globalize.translate('Play')}
                     </button>
-                    <a class="heroInfo emby-button button-flat" href="${detailUrl}" aria-label="${globalize.translate('MoreInfo')}: ${escapeHtml(item.Name ?? '')}">
+                    <a class="heroInfo emby-button button-flat" href="${detailUrl}" aria-label="${globalize.translate('ButtonInfo')}: ${escapeHtml(item.Name ?? '')}">
                         <span class="material-icons" aria-hidden="true">info</span>
-                        ${globalize.translate('MoreInfo')}
+                        ${globalize.translate('ButtonInfo')}
                     </a>
                 </div>
             </div>
@@ -135,8 +135,11 @@ function renderHero(
     };
 
     const next = () => {
+        if (!container.isConnected) {
+            window.clearInterval(timer);
+            return;
+        }
         index = (index + 1) % items.length;
-        container.classList.remove('heroVisible');
         setTimeout(() => {
             paint(items[index]);
             container.querySelectorAll('.heroDot').forEach((d, i) => {

@@ -59,6 +59,13 @@ $cinematic-surface-elevated: rgba(20, 20, 20, 0.85) !default;
 $cinematic-edge-light: rgba(255, 255, 255, 0.08) !default;
 $cinematic-glass-blur: 20px !default;
 $cinematic-glass-saturate: 180% !default;
+// Hero billboard action buttons — exposed as CSS vars so themes can re-skin
+$hero-playBg: #fff !default;
+$hero-playColor: #000 !default;
+$hero-playHoverBg: rgba(255, 255, 255, 0.85) !default;
+$hero-infoBg: rgba(109, 109, 110, 0.7) !default;
+$hero-infoColor: #fff !default;
+$hero-infoHoverBg: rgba(109, 109, 110, 0.5) !default;
 
 // Assign custom css variables not part of the MUI theme palette
 :root {
@@ -71,6 +78,12 @@ $cinematic-glass-saturate: 180% !default;
     --jf-cinematic-edge-light: #{$cinematic-edge-light};
     --jf-cinematic-glass-blur: #{$cinematic-glass-blur};
     --jf-cinematic-glass-saturate: #{$cinematic-glass-saturate};
+    --jf-hero-playBg: #{$hero-playBg};
+    --jf-hero-playColor: #{$hero-playColor};
+    --jf-hero-playHoverBg: #{$hero-playHoverBg};
+    --jf-hero-infoBg: #{$hero-infoBg};
+    --jf-hero-infoColor: #{$hero-infoColor};
+    --jf-hero-infoHoverBg: #{$hero-infoHoverBg};
 }
 
 * {
