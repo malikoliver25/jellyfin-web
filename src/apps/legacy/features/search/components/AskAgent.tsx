@@ -113,6 +113,7 @@ const AskAgent: FC<AskAgentProps> = ({ query }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
     const [ran, setRan] = useState(false);
+    const [degradedNote, setDegradedNote] = useState<string>();
 
     const parsed = useMemo(() => parseQuery(query), [query]);
 
@@ -123,6 +124,21 @@ const AskAgent: FC<AskAgentProps> = ({ query }) => {
         setRan(true);
         try {
             const userId = user.Id;
+            // Actor intent: resolve the name to a Person id, then filter items by personIds
+            let personIds: string[] | undefined;
+            if (parsed.actorName) {
+                const people = await getLibraryApi(api).getItems({
+                    userId,
+                    recursive: true,
+                    includeItemTypes: [BaseItemKind.Person],
+                    searchTerm: parsed.actorName,
+                    limit: 5
+                });
+                personIds = (people.data.Items ?? []).map(p => p.Id).filter((id): id is string => !!id);
+            }
+            // Place/origin (e.g. "New York", "artist from LA") can't be filtered server-side —
+            // degrade to a normal term search and surface a note instead of silent zero results.
+            const note = parsed.place || parsed.artistOrigin;
             // 1) exact-ish text match via search hints (fast)
             const hints = parsed.searchTerm ?
                 (await getSearchApi(api).getSearchHints({ searchTerm: parsed.searchTerm, userId, limit: 20, includeItemTypes: parsed.kinds })).data.SearchHints ?? [] :
@@ -136,6 +152,7 @@ const AskAgent: FC<AskAgentProps> = ({ query }) => {
                 includeItemTypes: parsed.kinds,
                 genres: parsed.genres,
                 years: parsed.minYear ? Array.from({ length: (parsed.maxYear ?? parsed.minYear) - parsed.minYear + 1 }, (_, i) => parsed.minYear! + i) : undefined,
+                personIds,
                 sortBy: [parsed.sortBy ?? ItemSortBy.Random],
                 sortOrder: [parsed.sortOrder ?? SortOrder.Descending],
                 isPlayed: parsed.unwatchedOnly ? false : undefined,
@@ -144,6 +161,7 @@ const AskAgent: FC<AskAgentProps> = ({ query }) => {
                 limit: 12,
                 fields: [ItemFields.Overview, ItemFields.Genres, ItemFields.DateCreated, ItemFields.MediaStreams]
             });
+            setDegradedNote(note ? `Note: "${note}" isn't a server-side filter — showing best text matches.` : undefined);
             const hintItems = hints.map(h => h.Id).filter((id): id is string => !!id);
             const hintDetails = hintItems.length ?
                 (await getLibraryApi(api).getItems({ userId, ids: hintItems, limit: hintItems.length })).data.Items ?? [] :
@@ -185,6 +203,7 @@ const AskAgent: FC<AskAgentProps> = ({ query }) => {
                     </p>
                 );
             })()}
+            {degradedNote && <p className='askAgentSummary'>{degradedNote}</p>}
             {error && <p className='askAgentError'>{error}</p>}
             {items.length > 0 && (
                 <div className='askAgentResults scrollSlider focuscontainer-x'>
