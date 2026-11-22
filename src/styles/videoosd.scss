@@ -304,9 +304,9 @@
 @keyframes pulse {
     0% {
         transform: scale(0.95);
-        color: var(--jf-palette-primary-main, rgba(123, 92, 255, 0.7));
-        background: var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.3));
-        box-shadow: 0 0 0 0 var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.3));
+        color: var(--jf-palette-primary-main);
+        background: var(--jf-palette-primary-hover);
+        box-shadow: 0 0 0 0 var(--jf-palette-primary-hover);
     }
 
     70% {
@@ -327,22 +327,22 @@
 @keyframes infinite-pulse {
     0% {
         transform: scale(0.95);
-        color: var(--jf-palette-primary-main, rgba(123, 92, 255, 0.7));
-        background: var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.3));
-        box-shadow: 0 0 0 0 var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.3));
+        color: var(--jf-palette-primary-main);
+        background: var(--jf-palette-primary-hover);
+        box-shadow: 0 0 0 0 var(--jf-palette-primary-hover);
     }
 
     70% {
         transform: scale(1);
-        color: var(--jf-palette-primary-main, rgba(123, 92, 255, 0.6));
+        color: var(--jf-palette-primary-main);
         background: rgba(123, 92, 255, 0);
         box-shadow: 0 0 0 60px rgba(123, 92, 255, 0);
     }
 
     100% {
         transform: scale(0.95);
-        color: var(--jf-palette-primary-main, rgba(123, 92, 255, 0.7));
-        background: var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.3));
+        color: var(--jf-palette-primary-main);
+        background: var(--jf-palette-primary-hover);
         box-shadow: 0 0 0 0 rgba(123, 92, 255, 0);
     }
 }

@@ -1225,15 +1225,15 @@ div.itemDetailGalleryLink.defaultCardBackground {
 }
 
 .recordingProgressBar::-moz-progress-bar {
-    background-color: var(--jf-palette-primary-main, #7b5cff);
+    background-color: var(--jf-palette-primary-main);
 }
 
 .recordingProgressBar::-webkit-progress-value {
-    background-color: var(--jf-palette-primary-main, #7b5cff);
+    background-color: var(--jf-palette-primary-main);
 }
 
 .recordingProgressBar[aria-valuenow]::before {
-    background-color: var(--jf-palette-primary-main, #7b5cff);
+    background-color: var(--jf-palette-primary-main);
 }
 
 .timelineHeader {
@@ -1424,7 +1424,7 @@ div:not(.sectionTitleContainer-cards) > .sectionTitle-cards {
 }
 
 .button-accent-flat {
-    color: var(--jf-palette-primary-main, #7b5cff) !important;
+    color: var(--jf-palette-primary-main) !important;
 }
 
 .clearLink {
