@@ -234,6 +234,12 @@
     border-bottom-color: var(--jf-cinematic-edge-light, rgba(255, 255, 255, 0.08));
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .skinHeader {
+        transition: none;
+    }
+}
+
 .layout-tv .skinHeader {
     /* In TV layout, it makes more sense to keep the top bar at the top of the page
        Having it follow the view only makes us lose vertical space, while not being focusable */
@@ -705,6 +711,7 @@
     .itemName {
         font-size: 2.2em;
         font-weight: 800;
+        line-height: 1.1;
         letter-spacing: -0.02em;
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     }

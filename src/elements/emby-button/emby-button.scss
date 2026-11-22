@@ -30,8 +30,10 @@
     transform-origin: center;
     transition: 0.2s;
 
-    &:active {
-        transform: scale(0.96);
+    @media (hover: hover) {
+        &:active {
+            transform: scale(0.96);
+        }
     }
 }
 

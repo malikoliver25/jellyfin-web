@@ -131,6 +131,14 @@ button::-moz-focus-inner {
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .card:hover > .cardBox {
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+}
+
 .cardBox-bottompadded {
     margin-bottom: 1.8em !important;
 }
