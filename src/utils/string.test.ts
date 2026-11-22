@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { isBlank, toBoolean, toFloat } from './string';
+import { isBlank, stripHtmlTags, toBoolean, toFloat } from './string';
 
 describe('isBlank', () => {
     it('Should return true if the string is blank', () => {
@@ -56,5 +56,22 @@ describe('toFloat()', () => {
 
         number = toFloat(null, -1);
         expect(number).toBe(-1);
+    });
+});
+
+describe('stripHtmlTags', () => {
+    it('removes html tags but keeps text and markdown', () => {
+        expect(stripHtmlTags('Great movie.<br>Second <i>line</i> with **bold**.'))
+            .toBe('Great movie. Second line with **bold**.');
+    });
+
+    it('neutralizes script tags', () => {
+        expect(stripHtmlTags('<script>alert(1)</script>Hello')).toBe('alert(1) Hello');
+    });
+
+    it('handles null/undefined/empty', () => {
+        expect(stripHtmlTags(null)).toBe('');
+        expect(stripHtmlTags(undefined)).toBe('');
+        expect(stripHtmlTags('')).toBe('');
     });
 });

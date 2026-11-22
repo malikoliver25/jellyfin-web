@@ -43,3 +43,13 @@ export function toFloat(value: string | null | undefined, defaultValue = 0) {
 
     return number;
 }
+
+/**
+ * Remove HTML tags from a string (e.g. stray <br>/<i> in metadata text) while
+ * leaving plain text and markdown intact.
+ * @param {string} value The string to strip.
+ * @returns {string} The string without HTML tags.
+ */
+export function stripHtmlTags(value: string | null | undefined) {
+    return (value ?? '').replace(/<[^<>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}

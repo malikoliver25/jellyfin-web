@@ -2,6 +2,7 @@ import createDOMPurify from 'dompurify';
 import { getAuthenticationApi } from '@jellyfin/sdk/lib/utils/api/authentication-api';
 import { getImageApi } from '@jellyfin/sdk/lib/utils/api/image-api';
 import markdownIt from 'markdown-it';
+import { stripHtmlTags } from 'utils/string';
 
 import { getBrandingOptionsQuery } from '@/apps/dashboard/features/branding/api/useBrandingOptions';
 import { AppFeature } from 'constants/appFeature';
@@ -324,8 +325,7 @@ export default function (view, params) {
             const loginDisclaimer = view.querySelector('.loginDisclaimer');
 
             // eslint-disable-next-line sonarjs/disabled-auto-escaping
-            loginDisclaimer.innerHTML = domPurify.sanitize(markdownIt({ html: true }).render(options.LoginDisclaimer || ''));
-
+            loginDisclaimer.innerHTML = domPurify.sanitize(markdownIt({ html: true }).render(stripHtmlTags(options.LoginDisclaimer)));
             for (const elem of loginDisclaimer.querySelectorAll('a')) {
                 elem.rel = 'noopener noreferrer';
                 elem.target = '_blank';

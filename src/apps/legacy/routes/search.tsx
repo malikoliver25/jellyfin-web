@@ -3,6 +3,7 @@ import React, { type FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDebounceValue } from 'usehooks-ts';
 
+import AskAgent from 'apps/legacy/features/search/components/AskAgent';
 import SearchFields from 'apps/legacy/features/search/components/SearchFields';
 import SearchResults from 'apps/legacy/features/search/components/SearchResults';
 import SearchSuggestions from 'apps/legacy/features/search/components/SearchSuggestions';
@@ -28,6 +29,7 @@ const Search: FC = () => {
             className='mainAnimatedPage libraryPage allLibraryPage noSecondaryNavPage'
         >
             <SearchFields query={query} onSearch={setQuery} />
+            {debouncedQuery && <AskAgent query={debouncedQuery} />}
             {!debouncedQuery ? (
                 <SearchSuggestions
                     parentId={parentIdQuery}

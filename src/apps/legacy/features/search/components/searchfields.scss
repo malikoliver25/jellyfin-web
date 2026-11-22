@@ -9,3 +9,48 @@
     font-size: 2em;
     align-self: flex-end;
 }
+
+/* Ask-the-agent panel on the search page */
+.askAgent {
+    margin: 0.5em 0 1.5em;
+    padding: 1em;
+    border-radius: var(--jf-card-borderRadius, 0.6em);
+    background: var(--jf-cinematic-surface-elevated, rgba(20, 20, 20, 0.85));
+    border: 1px solid var(--jf-cinematic-edge-light, rgba(255, 255, 255, 0.08));
+}
+
+.askAgentBar {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.askAgentLabel {
+    font-weight: 700;
+    flex: 1;
+}
+
+.askAgentSummary {
+    margin: 0.6em 0 0;
+    color: var(--jf-palette-text-secondary, rgba(255, 255, 255, 0.65));
+    font-size: 0.9em;
+}
+
+.askAgentError {
+    margin: 0.6em 0 0;
+    color: var(--jf-palette-error-main, #c62828);
+}
+
+.askAgentResults {
+    display: flex;
+    gap: 0.6em;
+    overflow-x: auto;
+    padding: 0.8em 0 0.4em;
+}
+
+.askAgentCard {
+    min-width: 10em;
+    max-width: 12em;
+    text-decoration: none;
+    color: inherit;
+}
