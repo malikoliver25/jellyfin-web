@@ -6,7 +6,7 @@ $primary-main: #7b5cff;
 $primary-dark: #5a3fd4;
 $primary-light: #9d85ff;
 $primary-hover: rgba(123, 92, 255, 0.2);
-$primary-contrastText: #fff;
+$primary-contrastText: rgba(0, 0, 0, 0.87); // AA-safe on the light-violet accent (upstream value)
 $error-main: #c62828;
 $error-dark: #8a1c1c;
 $error-light: #d15353;
