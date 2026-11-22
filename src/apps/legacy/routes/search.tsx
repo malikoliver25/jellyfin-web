@@ -29,7 +29,7 @@ const Search: FC = () => {
             className='mainAnimatedPage libraryPage allLibraryPage noSecondaryNavPage'
         >
             <SearchFields query={query} onSearch={setQuery} />
-            {debouncedQuery && <AskAgent query={debouncedQuery} onQueryChange={setQuery} />}
+            <AskAgent query={debouncedQuery} onQueryChange={setQuery} />
             {!debouncedQuery ? (
                 <SearchSuggestions
                     parentId={parentIdQuery}
