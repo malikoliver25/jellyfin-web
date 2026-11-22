@@ -13,6 +13,7 @@ import type { ApiClient } from 'jellyfin-apiclient';
 import { playbackManager } from 'components/playback/playbackmanager';
 import { appRouter } from 'components/router/appRouter';
 import layoutManager from 'components/layoutManager';
+import { stripHtmlTags } from 'utils/string';
 import globalize from 'lib/globalize';
 import ServerConnections from 'lib/jellyfin-apiclient/ServerConnections';
 import { queryClient } from 'utils/query/queryClient';
@@ -117,6 +118,9 @@ function renderHero(
                         <span class="material-icons" aria-hidden="true">info</span>
                         ${globalize.translate('ButtonInfo')}
                     </a>
+                    ${item.Overview ? `<button type="button" class="heroSpeak emby-button button-flat" aria-label="Read synopsis aloud: ${escapeHtml(item.Name ?? '')}" aria-pressed="false">
+                        <span class="material-icons" aria-hidden="true">volume_up</span>
+                    </button>` : ''}
                 </div>
             </div>
             <div class="heroDots">${items.map((_, i) => `<span class="heroDot${i === index ? ' active' : ''}"></span>`).join('')}</div>
@@ -129,6 +133,24 @@ function renderHero(
             e.preventDefault();
             appRouter.showItem(item, apiClient.serverId);
         });
+        const speakBtn = container.querySelector('.heroSpeak');
+        speakBtn?.addEventListener('click', () => {
+            const synth = window.speechSynthesis;
+            if (!synth) return;
+            if (synth.speaking) {
+                synth.cancel();
+                speakBtn.setAttribute('aria-pressed', 'false');
+                return;
+            }
+            const plain = stripHtmlTags(item.Overview ?? '');
+            if (!plain) return;
+            synth.cancel();
+            // eslint-disable-next-line compat/compat -- speechSynthesis is feature-detected above
+            const utter = new SpeechSynthesisUtterance(plain.slice(0, 600));
+            utter.onend = () => speakBtn.setAttribute('aria-pressed', 'false');
+            speakBtn.setAttribute('aria-pressed', 'true');
+            synth.speak(utter);
+        });
 
         container.classList.remove('hide');
         container.classList.add('heroVisible');
@@ -137,8 +159,10 @@ function renderHero(
     const next = () => {
         if (!container.isConnected) {
             window.clearInterval(timer);
+            window.speechSynthesis?.cancel();
             return;
         }
+        window.speechSynthesis?.cancel();
         index = (index + 1) % items.length;
         setTimeout(() => {
             paint(items[index]);

@@ -42,8 +42,16 @@ function setTheme(id) {
 
             currentThemeId = info.id;
 
+            // Smooth cross-fade: allow color/background transitions for one frame, then suppress again
+            const root = document.documentElement;
+            const style = document.createElement('style');
+            style.id = 'theme-transition';
+            style.textContent = '* { transition: background-color .45s ease, color .45s ease, border-color .45s ease, box-shadow .45s ease !important; }';
+            root.appendChild(style);
+            window.setTimeout(() => style.remove(), 500);
+
             // set the theme attribute for mui
-            document.documentElement.setAttribute('data-theme', info.id);
+            root.setAttribute('data-theme', info.id);
 
             // set the meta theme color
             document.getElementById('themeColor').content = info.color;
