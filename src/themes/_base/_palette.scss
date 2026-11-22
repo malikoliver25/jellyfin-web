@@ -1,11 +1,11 @@
 $common-white: #fff;
 $background-default: #080808;
 $background-paper: #141414;
-$primary-main: #e50914;
-$primary-dark: #b20710;
-$primary-light: #ff1a25;
-$primary-hover: rgba(229, 9, 20, 0.2);
-$primary-contrastText: rgba(0, 0, 0, 0.87);
+// Jellyfin-identity accent (blue-violet, echoes the stock #00a4dc but deeper) — not a Netflix clone red
+$primary-main: #7b5cff;
+$primary-dark: #5a3fd4;
+$primary-light: #9d85ff;
+$primary-hover: rgba(123, 92, 255, 0.2);
 $error-main: #c62828;
 $error-dark: #8a1c1c;
 $error-light: #d15353;

@@ -42,7 +42,7 @@
 }
 
 .mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__track {
-    background: rgba(229, 9, 20, 0.5);
+    background: var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.5));
 }
 
 .mdl-switch__input[disabled] + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__track {
@@ -76,9 +76,9 @@
 }
 
 .mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__thumb {
-    background: #e50914;
+    background: var(--jf-palette-primary-main, #7b5cff);
     left: 1.466em;
-    box-shadow: 0 2px 8px rgba(229, 9, 20, 0.4);
+    box-shadow: 0 2px 8px var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.4));
 }
 
 .mdl-switch__input[disabled] + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__thumb {
@@ -104,8 +104,8 @@
 }
 
 .mdl-switch__input:checked:focus + .mdl-switch__label + .mdl-switch__trackContainer .mdl-switch__focus-helper {
-    box-shadow: 0 0 0 1.39em rgba(229, 9, 20, 0.2);
-    background-color: rgba(229, 9, 20, 0.2);
+    box-shadow: 0 0 0 1.39em var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.2));
+    background-color: var(--jf-palette-primary-hover, rgba(123, 92, 255, 0.2));
 }
 
 .mdl-switch__label {

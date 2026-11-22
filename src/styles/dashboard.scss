@@ -29,16 +29,16 @@ progress::-webkit-progress-bar {
 }
 
 progress::-moz-progress-bar {
-    background-color: #e50914;
+    background-color: var(--jf-palette-primary-main, #7b5cff);
 }
 
 progress::-webkit-progress-value {
-    background-color: #e50914;
+    background-color: var(--jf-palette-primary-main, #7b5cff);
 }
 
 progress[aria-valuenow]::before {
     border-radius: 0.4em;
-    background-color: #e50914;
+    background-color: var(--jf-palette-primary-main, #7b5cff);
 }
 
 .localnav {

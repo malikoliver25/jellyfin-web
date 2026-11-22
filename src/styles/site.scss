@@ -48,8 +48,8 @@ body {
     overflow-x: hidden;
     background-color: #080808 !important;
     background-image:
-        radial-gradient(ellipse at 15% 0%, rgba(229, 9, 20, 0.035) 0%, transparent 50%),
-        radial-gradient(ellipse at 85% 100%, rgba(229, 9, 20, 0.025) 0%, transparent 50%),
+        radial-gradient(ellipse at 15% 0%, var(--jf-cinematic-glow-a, rgba(123, 92, 255, 0.045)) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 100%, var(--jf-cinematic-glow-b, rgba(123, 92, 255, 0.03)) 0%, transparent 50%),
         radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.01) 0%, transparent 70%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

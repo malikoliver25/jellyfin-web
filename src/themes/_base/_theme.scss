@@ -59,8 +59,8 @@ $cinematic-surface-elevated: rgba(20, 20, 20, 0.85) !default;
 $cinematic-edge-light: rgba(255, 255, 255, 0.08) !default;
 $cinematic-glass-blur: 20px !default;
 $cinematic-glass-saturate: 180% !default;
-$cinematic-glow-a: rgba(229, 9, 20, 0.04) !default;
-$cinematic-glow-b: rgba(229, 9, 20, 0.03) !default;
+$cinematic-glow-a: rgba(123, 92, 255, 0.05) !default;
+$cinematic-glow-b: rgba(123, 92, 255, 0.035) !default;
 // Hero billboard action buttons — exposed as CSS vars so themes can re-skin
 $hero-playBg: #fff !default;
 $hero-playColor: #000 !default;
@@ -163,8 +163,8 @@ html {
 html {
     background-color: var(--jf-palette-background-default, $background-default);
     background-image:
-        radial-gradient(ellipse at 20% 0%, var(--jf-cinematic-glow-a, rgba(229, 9, 20, 0.04)) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 100%, var(--jf-cinematic-glow-b, rgba(229, 9, 20, 0.03)) 0%, transparent 50%),
+        radial-gradient(ellipse at 20% 0%, var(--jf-cinematic-glow-a, rgba(123, 92, 255, 0.05)) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, var(--jf-cinematic-glow-b, rgba(123, 92, 255, 0.035)) 0%, transparent 50%),
         var(--jf-palette-background-defaultImage, $background-defaultImage);
     background-position: top center;
     background-repeat: no-repeat;
@@ -394,8 +394,8 @@ a[data-role="button"],
 .noBackdropTransparency .detailPageWrapperContainer {
     background-color: var(--jf-palette-background-default, $background-default);
     background-image:
-        radial-gradient(ellipse at 15% 0%, rgba(229, 9, 20, 0.035) 0%, transparent 50%),
-        radial-gradient(ellipse at 85% 100%, rgba(229, 9, 20, 0.025) 0%, transparent 50%),
+        radial-gradient(ellipse at 15% 0%, rgba(123, 92, 255, 0.045) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 100%, rgba(123, 92, 255, 0.03) 0%, transparent 50%),
         var(--jf-palette-background-defaultImage, $background-defaultImage);
     background-attachment: fixed;
     background-position: top center;
