@@ -125,6 +125,15 @@ button::-moz-focus-inner {
         filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
     }
 
+    /* Inner ring on the image container — same hover, no second transform */
+    .card:hover > .cardBox .cardImageContainer {
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+    }
+
+    .card:hover > .cardBox .cardImage {
+        transform: scale(1.04);
+    }
+
     .card:hover > .cardBox,
     .card.show-animation:focus > .cardBox {
         transition: transform 0.3s ease;

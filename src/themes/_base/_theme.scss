@@ -705,16 +705,7 @@ a[data-role="button"],
     font-size: clamp(1.15em, 1.6vw, 1.5em);
 }
 
-/* Cards: lift + inner ring on hover/focus, image zooms, press compresses */
-@media (hover: hover) {
-    .card:hover > .cardBox .cardImageContainer {
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), inset 0 0 0 2px rgba(255, 255, 255, 0.85);
-    }
-
-    .card:hover > .cardBox .cardImage {
-        transform: scale(1.04);
-    }
-}
+/* Cards: hover lift/ring/zoom live in cardbuilder/card.scss — kept single-sourced there */
 
 .card .cardImage {
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
