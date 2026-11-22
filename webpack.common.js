@@ -336,7 +336,10 @@ const config = {
                                     }
                                 }
                             },
-                            'sass-loader'
+                            {
+                                loader: 'sass-loader',
+                                options: { implementation: require('sass') }
+                            }
                         ]
                     },
                     {
@@ -351,7 +354,10 @@ const config = {
                                     }
                                 }
                             },
-                            'sass-loader'
+                            {
+                                loader: 'sass-loader',
+                                options: { implementation: require('sass') }
+                            }
                         ]
                     }
                 ]
