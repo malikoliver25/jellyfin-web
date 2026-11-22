@@ -5,6 +5,9 @@ declare module '@mui/material/styles' {
     interface ColorSchemeOverrides {
         appletv: true;
         blueradiance: true;
+        disneyplus: true;
+        hulu: true;
+        netflix: true;
         'catppuccin-frappe': true;
         'catppuccin-latte': true;
         'catppuccin-macchiato': true;
