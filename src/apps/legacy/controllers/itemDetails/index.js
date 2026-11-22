@@ -2172,6 +2172,7 @@ export default function (view, params) {
                     renderTrackSelections(page, self, currentItem, true);
                     renderBackdrop(page, currentItem);
                     refreshSelectedVersion();
+                    renderOverview(page, currentItem);
                 }
             } else {
                 reload(self, page, params);
