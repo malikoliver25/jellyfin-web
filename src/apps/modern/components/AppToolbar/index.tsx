@@ -8,7 +8,6 @@ import ServerButton from 'components/toolbar/ServerButton';
 
 import RemotePlayButton from './RemotePlayButton';
 import AskButton from './AskButton';
-import ThemeCycleButton from './ThemeCycleButton';
 import SyncPlayButton from './SyncPlayButton';
 import SearchButton from './SearchButton';
 import UserViewNav from './userViews/UserViewNav';
@@ -43,7 +42,6 @@ const AppToolbar: FC<AppToolbarProps> = ({
                     <RemotePlayButton />
                     <AskButton />
                     <SearchButton />
-                    <ThemeCycleButton />
                 </>
             )}
             isDrawerAvailable={isDrawerAvailable}

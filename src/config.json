@@ -3,54 +3,10 @@
   "multiserver": false,
   "themes": [
     {
-      "name": "Apple TV",
-      "id": "appletv",
-      "color": "#bcbcbc"
-    }, {
-      "name": "Blue Radiance",
-      "id": "blueradiance",
-      "color": "#011432"
-    }, {
-      "name": "Catppuccin - Latte",
-      "id": "catppuccin-latte",
-      "color": "#eff1f5"
-    }, {
-      "name": "Catppuccin - Frappe",
-      "id": "catppuccin-frappe",
-      "color": "#303446"
-    }, {
-      "name": "Catppuccin - Macchiato",
-      "id": "catppuccin-macchiato",
-      "color": "#24273a"
-    }, {
-      "name": "Catppuccin - Mocha",
-      "id": "catppuccin-mocha",
-      "color": "#1e1e2e"
-    }, {
       "name": "Dark",
       "id": "dark",
       "color": "#202020",
       "default": true
-    }, {
-      "name": "Light",
-      "id": "light",
-      "color": "#303030"
-    }, {
-      "name": "Purple Haze",
-      "id": "purplehaze",
-      "color": "#000420"
-    }, {
-      "name": "Disney+",
-      "id": "disneyplus",
-      "color": "#040714"
-    }, {
-      "name": "Hulu",
-      "id": "hulu",
-      "color": "#0b0c0f"
-    }, {
-      "name": "Netflix",
-      "id": "netflix",
-      "color": "#141414"
     }
   ],
   "menuLinks": [],
