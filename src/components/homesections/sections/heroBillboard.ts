@@ -20,7 +20,7 @@ import { queryClient } from 'utils/query/queryClient';
 const HERO_ROTATION_MS = 12000;
 const HERO_TYPES = [ BaseItemKind.Movie, BaseItemKind.Series ];
 
-function escapeHtml(value: string): string {
+export function escapeHtml(value: string): string {
     return value
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -28,7 +28,7 @@ function escapeHtml(value: string): string {
         .replace(/"/g, '&quot;');
 }
 
-function getBadges(item: BaseItemDto): string {
+export function getBadges(item: BaseItemDto): string {
     const badges: string[] = [];
     const video = item.MediaStreams?.find(s => s.Type === 'Video');
     if (video?.Width && video.Width >= 3800) badges.push('4K');
