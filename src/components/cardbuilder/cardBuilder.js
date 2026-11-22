@@ -999,6 +999,14 @@ function getHoverMenuHtml(item, action) {
 
     html += '<div class="cardOverlayContainer itemAction" data-action="' + action + '">';
 
+    // Hover meta panel (dx.bi pattern): rating + genres + one-line synopsis over the art
+    const metaParts = [];
+    if (item.CommunityRating) metaParts.push('★ ' + item.CommunityRating.toFixed(1));
+    if (item.OfficialRating) metaParts.push(item.OfficialRating);
+    if (item.ProductionYear) metaParts.push(String(item.ProductionYear));
+    if (item.Genres?.length) metaParts.push(item.Genres.slice(0, 2).join(' · '));
+    if (metaParts.length) html += '<div class="cardOverlayMeta">' + escapeHtml(metaParts.join('  ·  ')) + '</div>';
+    if (item.Overview) html += '<div class="cardOverlayOverview">' + escapeHtml(item.Overview.slice(0, 140)) + '</div>';
     const btnCssClass = 'cardOverlayButton cardOverlayButton-hover itemAction paper-icon-button-light';
 
     if (playbackManager.canPlay(item)) {

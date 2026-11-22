@@ -72,8 +72,11 @@
     max-width: min(24em, 60vw);
     max-height: 10em;
     margin-bottom: 1em;
-    /* soft bottom shade so logo art reads over busy backdrops (dx.bi pattern) */
+    /* soft bottom shade + blur-fade into the backdrop (dx.bi pattern) */
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 24px rgba(0, 0, 0, 0.45));
+    /* stylelint-disable-next-line declaration-block-no-duplicate-properties, property-no-vendor-prefix */
+    -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
 }
 
 .heroTitle {

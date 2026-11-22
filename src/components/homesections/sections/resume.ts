@@ -31,7 +31,7 @@ function getItemsToResumeFn(
         const options = {
             userId: apiClient.getCurrentUserId(),
             limit,
-            fields: [ ItemFields.PrimaryImageAspectRatio ],
+            fields: [ ItemFields.PrimaryImageAspectRatio, ItemFields.Genres, ItemFields.Overview ],
             imageTypeLimit: 1,
             enableImageTypes: [
                 ImageType.Primary,
